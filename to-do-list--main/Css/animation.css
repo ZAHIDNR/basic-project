@@ -1,0 +1,111 @@
+/* Fade-in animation for the page */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+body {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Slide-in animation for the menu sidebar */
+@keyframes slideIn {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.menu-sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    transition: left 0.3s ease-in-out;
+}
+
+.menu-sidebar.active {
+    left: 0;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+/* Rotate animation for the hamburger menu */
+@keyframes rotateMenu {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(180deg);
+    }
+}
+
+.hamburger-menu i:hover {
+    animation: rotateMenu 0.5s ease-in-out;
+}
+
+/* Dark Mode Toggle Button Animation */
+@keyframes buttonPulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#darkModeToggle:hover {
+    animation: buttonPulse 0.5s ease-in-out;
+}
+
+/* Button Hover Animation */
+@keyframes buttonHover {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+button:hover {
+    animation: buttonHover 0.3s ease-in-out;
+}
+
+/* Fade-in animation for the search card */
+@keyframes fadeInCard {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.search-card {
+    display: none;
+    animation: fadeInCard 0.5s ease-in-out;
+}
+
+/* When search card is shown, apply animation */
+.search-card.active {
+    display: block;
+    animation: fadeInCard 0.5s ease-in-out;
+}

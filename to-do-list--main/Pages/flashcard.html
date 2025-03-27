@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Flashcards</title>
+    <link rel="stylesheet" href="/to-do-list-/Css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .flashcard-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+           padding-right: 40px;
+        }
+        
+        .card-creation {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--button-bg);
+        }
+        
+        .flashcard {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            perspective: 1000px;
+            margin: 20px 0;
+        }
+        
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+        
+        .flashcard.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 10px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .card-front {
+            background-color: var(--button-bg);
+            color: white;
+            font-size: 1.5em;
+        }
+        
+        .card-back {
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            transform: rotateY(180deg);
+            border: 2px solid var(--button-bg);
+        }
+        
+        .card-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .deck-selection {
+            margin: 20px 0;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--button-bg);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+        }
+        
+        .input-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .flashcard-navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .flashcard-navigation button {
+            margin: 0 10px;
+        }
+        
+        .deck-management {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .preview-card {
+            margin: 20px 0;
+            display: none;
+        }
+        
+        /* For debugging */
+        .debug-info {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: monospace;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger-menu">
+        <i class="fas fa-bars" id="menuIcon"></i>
+    </div>
+
+    <!-- Menu Sidebar -->
+    <div class="menu-sidebar" id="menuSidebar">
+        <div class="close-btn">&times;</div>
+        <div class="menu-content">
+            <h3>Settings</h3>
+            <div class="font-size-section">
+                <p>Font Size</p>
+                <div class="font-controls">
+                    <button id="decreaseFont">A-</button>
+                    <button id="resetFont">Reset</button>
+                    <button id="increaseFont">A+</button>
+                </div>
+            </div>
+            <div class="navigation-section">
+                <h3>Applications</h3>
+                <a href="/to-do-list-/index.html" class="nav-button">To-Do List</a>
+                <a href="notepad.html" class="nav-button">Notepad</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
+
+    <h1>Sakura Flashcards</h1>
+
+    <div class="flashcard-container">
+        <div class="card-creation">
+            <h2>Create New Flashcard</h2>
+            <div class="input-group">
+                <label for="deckName">Deck Name:</label>
+                <input type="text" id="deckName" placeholder="e.g., Math, Science, History">
+            </div>
+            <div class="input-group">
+                <label for="cardQuestion">Question/Front Side:</label>
+                <textarea id="cardQuestion" placeholder="Enter the question or front side text"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="cardAnswer">Answer/Back Side:</label>
+                <textarea id="cardAnswer" placeholder="Enter the answer or back side text"></textarea>
+            </div>
+            <button id="addCard">Add Flashcard</button>
+            <button id="previewCard">Preview Card</button>
+            
+            <div class="preview-card" id="previewArea">
+                <div class="flashcard" id="previewFlashcard">
+                    <div class="card-inner">
+                        <div class="card-front" id="previewFront">
+                            Question appears here
+                        </div>
+                        <div class="card-back" id="previewBack">
+                            Answer appears here
+                        </div>
+                    </div>
+                </div>
+                <p>Click card to flip</p>
+            </div>
+        </div>
+        
+        <div class="deck-selection">
+            <h2>Study Flashcards</h2>
+            <div class="input-group">
+                <label for="selectDeck">Select Deck:</label>
+                <select id="selectDeck">
+                    <option value="">Select a deck to study</option>
+                </select>
+            </div>
+            <div class="deck-management">
+                <button id="startStudy">Start Studying</button>
+                <button id="deleteDeck">Delete Deck</button>
+            </div>
+        </div>
+        
+        <div id="studyArea" style="display: none;">
+            <h3 id="currentDeckName">Deck Name</h3>
+            <div class="flashcard" id="activeCard">
+                <div class="card-inner">
+                    <div class="card-front" id="cardFront">
+                        Question appears here
+                    </div>
+                    <div class="card-back" id="cardBack">
+                        Answer appears here
+                    </div>
+                </div>
+            </div>
+            <div class="flashcard-navigation">
+                <button id="prevCard">Previous</button>
+                <button id="nextCard">Next</button>
+            </div>
+            <div class="card-controls">
+                <span id="cardCounter">Card 0 of 0</span>
+                <button id="endStudy">End Study Session</button>
+            </div>
+        </div>
+        
+        <!-- Debug info -->
+        <div class="debug-info" id="debugInfo"></div>
+    </div>
+
+    <script>
+        // Get elements
+        const menuIcon = document.getElementById("menuIcon");
+        const menuSidebar = document.getElementById("menuSidebar");
+        const closeBtn = document.querySelector(".close-btn");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const debugInfo = document.getElementById("debugInfo");
+        
+        // Font Size Controls
+        const increaseFont = document.getElementById("increaseFont");
+        const decreaseFont = document.getElementById("decreaseFont");
+        const resetFont = document.getElementById("resetFont");
+        
+        // Flashcard elements
+        const deckNameInput = document.getElementById("deckName");
+        const cardQuestionInput = document.getElementById("cardQuestion");
+        const cardAnswerInput = document.getElementById("cardAnswer");
+        const addCardBtn = document.getElementById("addCard");
+        const previewCardBtn = document.getElementById("previewCard");
+        const previewArea = document.getElementById("previewArea");
+        const previewFlashcard = document.getElementById("previewFlashcard");
+        const previewFront = document.getElementById("previewFront");
+        const previewBack = document.getElementById("previewBack");
+        const selectDeck = document.getElementById("selectDeck");
+        const startStudyBtn = document.getElementById("startStudy");
+        const deleteDeckBtn = document.getElementById("deleteDeck");
+        const endStudyBtn = document.getElementById("endStudy");
+        const studyArea = document.getElementById("studyArea");
+        const currentDeckName = document.getElementById("currentDeckName");
+        const activeCard = document.getElementById("activeCard");
+        const cardFront = document.getElementById("cardFront");
+        const cardBack = document.getElementById("cardBack");
+        const prevCardBtn = document.getElementById("prevCard");
+        const nextCardBtn = document.getElementById("nextCard");
+        const cardCounter = document.getElementById("cardCounter");
+        
+        // Current font size (percentage of base size)
+        let currentFontSize = 100;
+        
+        // Flashcard variables
+        let decks = [];
+        let currentDeck = null;
+        let currentCardIndex = 0;
+        
+        // Debugging function
+        function debug(message) {
+            // Uncomment the next two lines for debugging
+            debugInfo.style.display = "block";
+            debugInfo.textContent = message;
+            console.log(message); // Also log to console
+        }
+        
+        // Hamburger Menu Toggle
+        menuIcon.addEventListener("click", () => {
+            menuSidebar.classList.add("active");
+        });
+        
+        closeBtn.addEventListener("click", () => {
+            menuSidebar.classList.remove("active");
+        });
+        
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+        });
+        
+        // Font Size Functions
+        function updateFontSize() {
+            document.documentElement.style.setProperty('--font-size-base', `${16 * (currentFontSize/100)}px`);
+            localStorage.setItem("fontSize", currentFontSize);
+        }
+        
+        increaseFont.addEventListener("click", () => {
+            if (currentFontSize < 150) {
+                currentFontSize += 10;
+                updateFontSize();
+            }
+        });
+        
+        decreaseFont.addEventListener("click", () => {
+            if (currentFontSize > 70) {
+                currentFontSize -= 10;
+                updateFontSize();
+            }
+        });
+        
+        resetFont.addEventListener("click", () => {
+            currentFontSize = 100;
+            updateFontSize();
+        });
+        
+        // Flashcard Functions
+        function loadDecks() {
+            const savedDecks = localStorage.getItem("sakuraFlashcards");
+            debug("Loading decks from localStorage: " + savedDecks);
+            
+            try {
+                decks = JSON.parse(savedDecks || "[]");
+            } catch (e) {
+                debug("Error parsing decks: " + e.message);
+                decks = [];
+            }
+            
+            updateDeckSelect();
+        }
+        
+        function updateDeckSelect() {
+            // Clear all options
+            selectDeck.innerHTML = '<option value="">Select a deck to study</option>';
+            
+            // Add deck options
+            decks.forEach((deck, index) => {
+                const option = document.createElement("option");
+                option.value = index;
+                option.textContent = `${deck.name} (${deck.cards.length} cards)`;
+                selectDeck.appendChild(option);
+            });
+            
+            debug("Updated deck select with " + decks.length + " decks");
+        }
+        
+        function saveDecks() {
+            try {
+                const decksJSON = JSON.stringify(decks);
+                debug("Saving decks to localStorage: " + decksJSON);
+                localStorage.setItem("sakuraFlashcards", decksJSON);
+                updateDeckSelect();
+            } catch (e) {
+                debug("Error saving decks: " + e.message);
+                alert("Error saving decks: " + e.message);
+            }
+        }
+        
+        // Preview card functionality
+        previewCardBtn.addEventListener("click", () => {
+            const question = cardQuestionInput.value.trim();
+            const answer = cardAnswerInput.value.trim();
+            
+            if (question === "" || answer === "") {
+                alert("Please fill in both question and answer fields to preview!");
+                return;
+            }
+            
+            // Display the preview area
+            previewArea.style.display = "block";
+            
+            // Update preview card content
+            previewFront.textContent = question;
+            previewBack.textContent = answer;
+            
+            // Reset flip state
+            previewFlashcard.classList.remove("flipped");
+        });
+        
+        // Flip preview card when clicked
+        previewFlashcard.addEventListener("click", () => {
+            previewFlashcard.classList.toggle("flipped");
+        });
+        
+        addCardBtn.addEventListener("click", () => {
+            const deckName = deckNameInput.value.trim();
+            const question = cardQuestionInput.value.trim();
+            const answer = cardAnswerInput.value.trim();
+            
+            if (deckName === "" || question === "" || answer === "") {
+                alert("Please fill in all fields!");
+                return;
+            }
+            
+            // Find or create deck
+            let deckIndex = decks.findIndex(d => d.name.toLowerCase() === deckName.toLowerCase());
+            
+            if (deckIndex === -1) {
+                // Create new deck
+                decks.push({
+                    name: deckName,
+                    cards: []
+                });
+                deckIndex = decks.length - 1;
+            }
+            
+            // Add card to deck
+            decks[deckIndex].cards.push({
+                question: question,
+                answer: answer
+            });
+            
+            // Save decks
+            saveDecks();
+            
+            // Clear inputs
+            cardQuestionInput.value = "";
+            cardAnswerInput.value = "";
+            previewArea.style.display = "none";
+            
+            alert("Flashcard added to " + deckName + "!");
+        });
+        
+        // Delete deck functionality - Fixed
+        deleteDeckBtn.addEventListener("click", () => {
+            const selectedValue = selectDeck.value;
+            
+            if (selectedValue === "") {
+                alert("Please select a deck to delete!");
+                return;
+            }
+            
+            const deckIndex = parseInt(selectedValue);
+            
+            if (isNaN(deckIndex) || deckIndex < 0 || deckIndex >= decks.length) {
+                alert("Invalid deck selection. Please try again.");
+                updateDeckSelect(); // Refresh the select dropdown
+                return;
+            }
+            
+            const deckToDelete = decks[deckIndex];
+            debug("Attempting to delete deck: " + deckToDelete.name + " at index: " + deckIndex);
+            
+            // Confirm deletion
+            if (confirm(`Are you sure you want to delete the deck "${deckToDelete.name}" with ${deckToDelete.cards.length} cards? This cannot be undone.`)) {
+                // Remove the deck
+                decks.splice(deckIndex, 1);
+                
+                // Save updated decks
+                saveDecks();
+                
+                // Check if we're currently viewing the deleted deck
+                if (currentDeck && currentDeck.name === deckToDelete.name) {
+                    studyArea.style.display = "none";
+                    currentDeck = null;
+                }
+                
+                debug("Deck deleted. Remaining decks: " + decks.length);
+                
+                // Reset select dropdown
+                selectDeck.value = "";
+                
+                alert("Deck deleted successfully!");
+            }
+        });
+        
+        startStudyBtn.addEventListener("click", () => {
+            const selectedValue = selectDeck.value;
+            
+            if (selectedValue === "") {
+                alert("Please select a deck to study!");
+                return;
+            }
+            
+            const deckIndex = parseInt(selectedValue);
+            
+            if (isNaN(deckIndex) || deckIndex < 0 || deckIndex >= decks.length) {
+                alert("Invalid deck selection. Please try again.");
+                updateDeckSelect(); // Refresh the select dropdown
+                return;
+            }
+            
+            currentDeck = decks[deckIndex];
+            currentCardIndex = 0;
+            
+            // Show study area
+            studyArea.style.display = "block";
+            currentDeckName.textContent = currentDeck.name;
+            
+            // Show first card
+            showCurrentCard();
+        });
+        
+        endStudyBtn.addEventListener("click", () => {
+            studyArea.style.display = "none";
+            currentDeck = null;
+        });
+        
+        function showCurrentCard() {
+            if (!currentDeck || currentDeck.cards.length === 0) {
+                cardFront.textContent = "No cards in this deck";
+                cardBack.textContent = "Add some cards first";
+                cardCounter.textContent = "Card 0 of 0";
+                return;
+            }
+            
+            const card = currentDeck.cards[currentCardIndex];
+            cardFront.textContent = card.question;
+            cardBack.textContent = card.answer;
+            cardCounter.textContent = `Card ${currentCardIndex + 1} of ${currentDeck.cards.length}`;
+            
+            // Reset flip state
+            activeCard.classList.remove("flipped");
+        }
+        
+        // Card navigation
+        prevCardBtn.addEventListener("click", () => {
+            if (!currentDeck || currentDeck.cards.length === 0) return;
+            
+            currentCardIndex--;
+            if (currentCardIndex < 0) {
+                currentCardIndex = currentDeck.cards.length - 1;
+            }
+            
+            showCurrentCard();
+        });
+        
+        nextCardBtn.addEventListener("click", () => {
+            if (!currentDeck || currentDeck.cards.length === 0) return;
+            
+            currentCardIndex++;
+            if (currentCardIndex >= currentDeck.cards.length) {
+                currentCardIndex = 0;
+            }
+            
+            showCurrentCard();
+        });
+        
+        // Flip card when clicked
+        activeCard.addEventListener("click", () => {
+            activeCard.classList.toggle("flipped");
+        });
+        
+        // Load settings from localStorage
+        window.addEventListener("DOMContentLoaded", () => {
+            // Load dark mode setting
+            if (localStorage.getItem("darkMode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+            
+            // Load font size setting
+            const savedFontSize = localStorage.getItem("fontSize");
+            if (savedFontSize) {
+                currentFontSize = parseInt(savedFontSize);
+                updateFontSize();
+            }
+            
+            // Load flashcard decks
+            loadDecks();
+            
+            // Enable debugging for troubleshooting
+            debugInfo.style.display = "block";
+        });
+    </script>
+</body>
+</html>

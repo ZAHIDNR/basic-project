@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakura Notepad</title>
+    <link rel="stylesheet" href="/to-do-list-/Css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        .notepad-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            padding-right: 40px;
+        }
+        
+        .notepad-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+        
+        .notepad-textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 1px solid var(--button-bg);
+            border-radius: 5px;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 1em;
+            resize: vertical;
+        }
+        
+        .note-list {
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .note-item {
+            background: var(--card-bg);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid var(--button-bg);
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .note-title {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hamburger Menu Icon -->
+    <div class="hamburger-menu">
+        <i class="fas fa-bars" id="menuIcon"></i>
+    </div>
+
+    <!-- Menu Sidebar -->
+    <div class="menu-sidebar" id="menuSidebar">
+        <div class="close-btn">&times;</div>
+        <div class="menu-content">
+            <h3>Settings</h3>
+            <div class="font-size-section">
+                <p>Font Size</p>
+                <div class="font-controls">
+                    <button id="decreaseFont">A-</button>
+                    <button id="resetFont">Reset</button>
+                    <button id="increaseFont">A+</button>
+                </div>
+            </div>
+            <div class="navigation-section">
+                <h3>Applications</h3>
+                <a href="/to-do-list-/index.html" class="nav-button">To-Do List</a>
+                <a href="flashcard.html" class="nav-button">Flashcards</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Dark Mode Toggle -->
+    <button id="darkModeToggle">🌙 Toggle Dark Mode</button>
+
+    <h1>Sakura Notepad</h1>
+
+    <div class="notepad-container">
+        <div class="notepad-controls">
+            <input type="text" id="noteTitle" placeholder="Note Title">
+            <button id="saveNote">Save Note</button>
+        </div>
+        <textarea class="notepad-textarea" id="noteContent" placeholder="Start typing your note here..."></textarea>
+        
+        <h3>Saved Notes</h3>
+        <div class="note-list" id="noteList">
+            <!-- Notes will be added here dynamically -->
+        </div>
+    </div>
+
+    <script>
+        // Get elements
+        const menuIcon = document.getElementById("menuIcon");
+        const menuSidebar = document.getElementById("menuSidebar");
+        const closeBtn = document.querySelector(".close-btn");
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        
+        // Font Size Controls
+        const increaseFont = document.getElementById("increaseFont");
+        const decreaseFont = document.getElementById("decreaseFont");
+        const resetFont = document.getElementById("resetFont");
+        
+        // Notepad elements
+        const noteTitle = document.getElementById("noteTitle");
+        const noteContent = document.getElementById("noteContent");
+        const saveNoteBtn = document.getElementById("saveNote");
+        const noteList = document.getElementById("noteList");
+        
+        // Current font size (percentage of base size)
+        let currentFontSize = 100;
+        
+        // Hamburger Menu Toggle
+        menuIcon.addEventListener("click", () => {
+            menuSidebar.classList.add("active");
+        });
+        
+        closeBtn.addEventListener("click", () => {
+            menuSidebar.classList.remove("active");
+        });
+        
+        // Dark Mode Toggle
+        darkModeToggle.addEventListener("click", () => {
+            document.body.classList.toggle("dark-mode");
+            localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+        });
+        
+        // Font Size Functions
+        function updateFontSize() {
+            document.documentElement.style.setProperty('--font-size-base', `${16 * (currentFontSize/100)}px`);
+            localStorage.setItem("fontSize", currentFontSize);
+        }
+        
+        increaseFont.addEventListener("click", () => {
+            if (currentFontSize < 150) {
+                currentFontSize += 10;
+                updateFontSize();
+            }
+        });
+        
+        decreaseFont.addEventListener("click", () => {
+            if (currentFontSize > 70) {
+                currentFontSize -= 10;
+                updateFontSize();
+            }
+        });
+        
+        resetFont.addEventListener("click", () => {
+            currentFontSize = 100;
+            updateFontSize();
+        });
+        
+        // Save Note Function
+        saveNoteBtn.addEventListener("click", () => {
+            const title = noteTitle.value.trim();
+            const content = noteContent.value.trim();
+            
+            if (title === "" || content === "") {
+                alert("Please enter both title and content for your note!");
+                return;
+            }
+            
+            // Get existing notes or initialize empty array
+            let notes = JSON.parse(localStorage.getItem("sakuraNotes") || "[]");
+            
+            // Add new note
+            notes.push({
+                id: Date.now(),
+                title: title,
+                content: content
+            });
+            
+            // Save to localStorage
+            localStorage.setItem("sakuraNotes", JSON.stringify(notes));
+            
+            // Reset fields
+            noteTitle.value = "";
+            noteContent.value = "";
+            
+            // Refresh note list
+            displayNotes();
+        });
+        
+        // Display Notes
+        function displayNotes() {
+            let notes = JSON.parse(localStorage.getItem("sakuraNotes") || "[]");
+            noteList.innerHTML = "";
+            
+            if (notes.length === 0) {
+                noteList.innerHTML = "<p>No saved notes yet!</p>";
+                return;
+            }
+            
+            notes.forEach(note => {
+                const noteElement = document.createElement("div");
+                noteElement.className = "note-item";
+                noteElement.innerHTML = `
+                    <div>
+                        <div class="note-title">${note.title}</div>
+                        <div class="note-preview">${note.content.substring(0, 50)}${note.content.length > 50 ? "..." : ""}</div>
+                    </div>
+                    <div>
+                        <button class="view-btn" data-id="${note.id}">View</button>
+                        <button class="delete-btn" data-id="${note.id}">Delete</button>
+                    </div>
+                `;
+                noteList.appendChild(noteElement);
+            });
+            
+            // Add event listeners for view and delete buttons
+            document.querySelectorAll(".view-btn").forEach(btn => {
+                btn.addEventListener("click", function() {
+                    const noteId = parseInt(this.getAttribute("data-id"));
+                    const notes = JSON.parse(localStorage.getItem("sakuraNotes") || "[]");
+                    const note = notes.find(n => n.id === noteId);
+                    
+                    if (note) {
+                        noteTitle.value = note.title;
+                        noteContent.value = note.content;
+                    }
+                });
+            });
+            
+            document.querySelectorAll(".delete-btn").forEach(btn => {
+                btn.addEventListener("click", function() {
+                    const noteId = parseInt(this.getAttribute("data-id"));
+                    let notes = JSON.parse(localStorage.getItem("sakuraNotes") || "[]");
+                    notes = notes.filter(n => n.id !== noteId);
+                    
+                    localStorage.setItem("sakuraNotes", JSON.stringify(notes));
+                    displayNotes();
+                });
+            });
+        }
+        
+        // Load settings from localStorage
+        window.addEventListener("DOMContentLoaded", () => {
+            // Load dark mode setting
+            if (localStorage.getItem("darkMode") === "true") {
+                document.body.classList.add("dark-mode");
+            }
+            
+            // Load font size setting
+            const savedFontSize = localStorage.getItem("fontSize");
+            if (savedFontSize) {
+                currentFontSize = parseInt(savedFontSize);
+                updateFontSize();
+            }
+            
+            // Display saved notes
+            displayNotes();
+        });
+    </script>
+</body>
+</html>

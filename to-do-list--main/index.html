@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Sakura-Themed To-Do List</title>
+    <link rel="stylesheet" href="Css/styles.css">
+    <link rel="stylesheet" href="Css/animation.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="hamburger-menu" >
+            <i class="fas fa-bars" id="menuIcon"></i>
+        </div>
+
+        <div class="nav-actions">
+            <!-- Search Bar -->
+            <div class="search-container" style="width: 210px;">
+                <input type="text" id="search" placeholder="Search anyone">
+                <button id="searchBtn">🔍</button>
+            </div>
+
+            <!-- Dark Mode Toggle -->
+            <button id="darkModeToggle">🌙</button>
+        </div>
+    </nav>
+
+    <!-- Menu Sidebar -->
+    <div class="menu-sidebar" id="menuSidebar">
+        <div class="close-btn">&times;</div>
+        <div class="menu-content">
+            <h3>Settings</h3>
+            <div class="font-size-section">
+                <p>Font Size</p>
+                <div class="font-controls">
+                    <button id="decreaseFont">A-</button>
+                    <button id="resetFont">Reset</button>
+                    <button id="increaseFont">A+</button>
+                </div>
+            </div>
+            <div class="navigation-section">
+                <h3>Applications</h3>
+                <a href="Pages/notepad.html" class="nav-button">Notepad</a>
+                <a href="Pages/flashcard.html" class="nav-button">Flashcards</a>
+            </div>
+        </div>
+    </div>
+
+    <h1>My Sakura-Themed To-Do List</h1>
+
+    <div class="container">
+        <label for="item">Enter a new item:</label>
+        <input type="text" id="item">
+        <button id="addItem">Add item</button>
+        <ul id="todoList"></ul>
+    </div>
+
+    <!-- Search Result Card -->
+    <div class="search-card" id="searchCard">
+        <img id="searchImage" src="" alt="Profile">
+        <h2 id="searchName"></h2>
+        <p id="searchDesc"></p>
+    </div>
+
+    <script src="Js/script.js"></script>
+</body>
+</html>
