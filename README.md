@@ -9,7 +9,7 @@ This work of art deserves a legendary name. Please, drop your suggestions—beca
 
 And if you dare rate it lower… well, let’s just say you might need to get your eyes checked. 👀😂
 Enjoy my artistic brilliance:
-![Preview](Project Preview IMG/sketching-board.png)
+![Preview](Project%20Preview%20IMG/sketching-board.png)
 
 2. sakura themed to do app
- ![Preview](Project Preview IMG/todoapp.png)
+ ![Preview](Project%20Preview%20IMG/todoapp.png)
