@@ -3,3 +3,6 @@ I was working on my grid project, but the color change feature wasn’t working.
 After checking my code, I realized The issue was that I was using if (color) inside the mouseover event, but color was not dynamically updating when the user selected a new color. The changeColor function updated colorChanged, but since color was just a parameter passed once to createGrid(), it didn’t reflect the new value.
 
 By replacing color with colorChanged, the event handler directly accessed the updated color, making the color change dynamic.
+
+Some features are not available yet, but we plan to add them in future updates. 
+For example, the download feature is not currently included, but we are working on it and will introduce it later.
