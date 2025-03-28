@@ -1,4 +1,4 @@
-# 🎨 Behold! The Sketching Board Preview—a Masterpiece Beyond Mortal Comprehension!  
+1. # 🎨 Behold! The Sketching Board Preview—a Masterpiece Beyond Mortal Comprehension!  
 
 I have poured my **heart, soul, and at least three cups of coffee** into this drawing. ☕🎨  
 You may see just lines and shapes, but **true artists** will recognize the raw, unfiltered genius behind it.  
@@ -18,7 +18,7 @@ And if you dare rate it lower… well, let’s just say **you might need to get 
 
 ---
 
-## 🌸 Sakura-Themed To-Do App  
+2. ## 🌸 Sakura-Themed To-Do App  
 A beautifully designed to-do app with a soft **Sakura theme**!  
 
 <p align="center">
