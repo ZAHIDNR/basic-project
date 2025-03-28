@@ -61,7 +61,7 @@ function createGrid(size, color) {
                 if (coloringEnabled) {
                     if (eraserSelected) {
                         e.target.style.backgroundColor = "rgb(15, 17, 8)";
-                    } else if (color) {
+                    } else if (colorChanged) {
                         e.target.style.backgroundColor = colorInput.value;
                     } else {
                         e.target.style.backgroundColor = randomColor();
