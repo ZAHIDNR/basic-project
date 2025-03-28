@@ -15,7 +15,7 @@ And if you dare rate it lower… well, let’s just say **you might need to get 
 <p align="center">
   <img src="Project%20Preview%20IMG/sketching-board.png" alt="Sketching Board Preview" width="500">
 </p>  
-
+ <a href = "https://zahidnr.github.io/mini-project/Sketch-board/">Preview</a>
 ---
 
 2. ## 🌸 Sakura-Themed To-Do App  
