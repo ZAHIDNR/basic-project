@@ -27,7 +27,8 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 
 
 <p align="center">
-  <img src="Project%20Preview%20IMG/Screenshot from 2025-04-24 12-39-59.png" alt="calculator App Preview" width="500">
+  <img src="Project%20Preview%20IMG/formDark.png" alt="calculator App Preview" width="500">
+ <img src="Project%20Preview%20IMG/formLight.png" alt="calculator App Preview" width="500">
 </p>  
  <a href = "https://zahidnr.github.io/mini-project/moden-form/">Preview</a>
 
