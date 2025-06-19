@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>form</title>
+    <link rel="stylesheet" href="/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body class="">
+<nav>
+  <div class="nav-left">
+    <button class="logo-btn" title="Toggle Theme">
+      🌙
+    </button>
+  </div>
+  <div class="nav-right">
+    <a href="https://github.com/ZAHIDNR/mini-project" target="_blank" class="nav-btn github-btn" title="GitHub Repo">
+      <i class="fa-brands fa-github"></i>
+    </a>
+    <button class="nav-btn danger-btn" title="Danger Action">
+      <i class="fa-solid fa-triangle-exclamation"></i>
+    </button>
+  </div>
+</nav>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="center-container">
+    <div class="container">
+      <div class="form-container">
+        <h1>Tell us about yourself</h1>
+        <p>Fill out the form below to contact us</p>
+        <form method="post">
+          <div class="all-input-container">
+            <div class="input-field">
+              <input type="datetime-local" required placeholder="Date-Time" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                minlength="2"
+                maxlength="16"
+                required
+                placeholder="Full Name"
+              />
+            </div>
+            <div class="input-field">
+              <i class="fa-solid fa-key"></i>
+              <input
+                type="password"
+                minlength="8"
+                required
+                placeholder="Enter Password"
+              />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input type="email" required placeholder="E-mail" />
+            </div>
+            <div class="input-field">
+              <i class="fa-solid fa-person-cane"></i>
+              <input
+                type="number"
+                min="0"
+                max="99"
+                step="2"
+                placeholder="Age"
+              />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-phone"></i>
+              <input type="tel" required placeholder="Phone" />
+            </div>
+          </div>
+
+          <div class="checkbox-container">
+            <fieldset>
+              <legend>Choose what you identify as</legend>
+              <div class="radio-field">
+                <div class="radio">
+                  <label for="radio1"> Male </label>
+                  <input type="radio" name="gender" id="radio1" />
+                </div>
+                <div class="radio">
+                  <label for="radio2"> Female </label>
+                  <input type="radio" name="gender" id="radio2" />
+                </div>
+              </div>
+
+              <div class="checkbox-field">
+                <div class="check">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox"> Lizard </label>
+                </div>
+                <div class="check">
+                <input type="checkbox" id="checkbox" />
+                <label for="checkbox"> Warm rock </label>
+              </div>
+              </div>
+            </fieldset>
+          </div>
+
+          <div class="selects">
+            <div class="datalist-field">
+              <label for="datalist" class="mt-mb">Language:</label>
+              <input
+                type="text"
+                id="datalist"
+                name="datalist"
+                list="languages"
+              />
+              <datalist id="languages">
+                <option value="English"></option>
+                <option value="Hindi"></option>
+                <option value="Spanish"></option>
+                <option value="French"></option>
+                <option value="Arabic"></option>
+                <option value="Mandarin Chinese"></option>
+                <option value="Russian"></option>
+                <option value="Portuguese"></option>
+                <option value="Japanese"></option>
+                <option value="German"></option>
+                <option value="Korean"></option>
+                <option value="Turkish"></option>
+                <option value="Italian"></option>
+              </datalist>
+            </div>
+
+            <div class="moden-select-field">
+              <label for="moden-select" class="mt-mb"
+                >programing-language</label
+              >
+              <select name="options" id="option">
+                <option value="python">Python</option>
+                <option value="javascript">JavaScript</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="cpp">C++</option>
+                <option value="ruby">Ruby</option>
+                <option value="swift">Swift</option>
+                <option value="php">PHP</option>
+                <option value="go">Go</option>
+                <option value="rust">Rust</option>
+              </select>
+            </div>
+
+            <div class="url-field top-margin">
+              <input type="url" placeholder="Url-(optional)" />
+            </div>
+            <div class="socalMedia-field top-margin">
+              <input type="url" placeholder="Social media" required />
+            </div>
+            <div class="message-field">
+              <i class="fas fa-message"></i>
+              <textarea
+                id="textarea"
+                minlength="20"
+                maxlength="280"
+                placeholder="Your message"
+              ></textarea>
+            </div>
+          </div>
+          <button type="submit">
+            <div class="btn-content">
+              <span>Send Message</span>
+              <i class="fas fa-paper-plane"></i>
+            </div>
+          </button>
+        </form>
+      </div>
+    </div>
+</div>
+    <script src="/script.js">
+ 
+    </script>
+  </body>
+</html>
