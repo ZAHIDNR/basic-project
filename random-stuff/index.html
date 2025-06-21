@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MD</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+
+  <body>
+    <img class="img-gradient" src="gradient.png" alt="" />
+    <div class="layer-blur"></div>
+    <div class="container">
+      <header>
+        <h1 data-aos="fade-down" data-aos-duration="1500" class="logo">
+          MD MEHADI
+        </h1>
+        <nav>
+          <a
+            data-aos="fade-down"
+            data-aos-duration="1500"
+            href="https://pabnaonline.net"
+            >FEATURES</a
+          >
+          <a
+            data-aos="fade-down"
+            data-aos-duration="2500"
+            href="https://pabnaonline.net"
+            >PRICES</a
+          >
+          <a
+            data-aos="fade-down"
+            data-aos-duration="3000"
+            href="https://pabnaonline.net"
+            >CONTACT US</a
+          >
+        </nav>
+        <button
+          data-aos="fade-down"
+          data-aos-duration="1500"
+          class="btn-signing"
+        >
+          CREATE ACCOUNT
+        </button>
+      </header>
+      <main>
+        <div
+          class="content"
+          data-aos="fade-zoom-in"
+          data-aos-easing="ease-in-back"
+          data-aos-delay="300"
+        >
+          <div class="inputs-add no-select no-drag" 
+             class="buttons"
+              data-aos="fade-zoom-in"
+              data-aos-easing="ease-in-back"
+              data-aos-delay="300"
+              data-aos-offset="0"
+              data-aos-duration="1500">
+            <div class="input-field tag-box">
+              <i class="fas fa-user"></i>
+              <input class="tag"
+                type="text"
+                minlength="2"
+                maxlength="16"
+                required
+                placeholder="Full Name"
+              />
+            </div>
+            <div class="input-field tag-box no-select no-drag">
+              <i class="fa-solid fa-key"></i>
+              <input class="tag"
+                type="password"
+                minlength="8"
+                required
+                placeholder="Enter Password"
+              />
+            </div>
+            <div
+              class="buttons no-drag"
+              data-aos="fade-zoom-in"
+              data-aos-easing="ease-in-back"
+              data-aos-delay="300"
+              data-aos-offset="0"
+              data-aos-duration="1500"
+            >
+              <a href="https://pabnaonline.net" class="btn-get-started no-select no-drag"
+                >Know more</a
+              >
+              <a href="" class="btn-sighning-main no-select no-drag"> LOGIN</a>
+            </div>
+          </div>
+        </div>
+      </main>
+      <spline-viewer
+        data-aos="fade-zoom-in"
+        data-aos-easing="ease-in-back"
+        data-aos-delay="300"
+        data-aos-offset="0"
+        data-aos-duration="3000"
+        class="robot-3d"
+        url="https://prod.spline.design/1HLyAB8L6Qt-d94c/scene.splinecode"
+      ></spline-viewer>
+    </div>
+    <script
+      type="module"
+      src="https://unpkg.com/@splinetool/viewer@1.10.13/build/spline-viewer.js"
+    ></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>
