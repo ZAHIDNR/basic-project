@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>No Privacy Here</title>
+  <style>
+    body {
+      background-color: #ffeecc;
+      font-family: 'Comic Sans MS', cursive;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+    h1 {
+      color: #ff0000;
+      font-size: 48px;
+      text-shadow: 2px 2px #000;
+    }
+    .message {
+      font-size: 22px;
+      color: #008000;
+    }
+    .link {
+      color: #ff00ff;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚫 IF you are on our website 🚫</h1>
+
+  <p style="font-size:24px; color:#000080;">
+    There is <strong style="color:red;">no privecy</strong> here. In fact...
+  </p>
+
+  <p id="message" class="message">
+    Tell us your dettails right 
+    <span id="link-container">
+      <a href="#" class="link" onclick="handleClick(event)">here</a>
+    </span> 
+    so we can hack you! 
+  </p>
+
+  <p style="font-size:18px; margin-top:40px; color:gray;">
+    (Totally not suspicious at all. Trust us, we're on the internet.)<br>
+    🔒 This is 146% safe. Maybe.
+  </p>
+
+  <script>
+    let clickedOnce = false;
+
+    function handleClick(event) {
+      event.preventDefault();
+
+      if (!clickedOnce) {
+        clickedOnce = true;
+
+        // Update the message
+        const message = document.getElementById("message");
+        message.innerHTML = "😅 Whoa there, champ! Why you so huurry in getting hack?<br>Chill... let me update the link for you.";
+
+        // After 3 seconds, update the message with the real link
+        setTimeout(() => {
+          message.innerHTML = `Alright, updated. Click if you want it <em>that</em> bad 👀<br>
+            <a href="https://zahidnr.github.io/mini-project/moden-form/" class="link">Okay fine, click here to get hacked </a>`;
+        }, 5000);
+      }
+    }
+  </script>
+
+</body>
+</html>
