@@ -45,4 +45,4 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 <p align="center">
   <img src="Project%20Preview%20IMG/book-laibery.png" width="500">
 </p>  
- <a href = "https://zahidnr.github.io/basic-project/Book-laibery/index.html/">Preview</a>
+ <a href = "https://zahidnr.github.io/basic-project/Book-laibery/">Preview</a>
