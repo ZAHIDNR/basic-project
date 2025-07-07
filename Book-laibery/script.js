@@ -274,3 +274,58 @@ function saveToStorage() {
   localStorage.setItem("myLibrary", JSON.stringify(allBooks));
 }
 renderLibrary();
+
+const recommendedBooks = [
+  {
+    title: "Maditation",
+    author: "marcus",
+    totalPage: "373",
+    lastReadPage: "73",
+    lastReadDate: "1950-03-31",
+    uniqId: crypto.randomUUID(),
+    isfavourite: true,
+    imgPath: "assets/book4.png",
+  },
+  {
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    totalPage: "444",
+    lastReadPage: "50",
+    lastReadDate: "2001-11-05",
+    uniqId: crypto.randomUUID(),
+    isfavourite: false,
+    imgPath: "assets/book5.png",
+  },
+  {
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    totalPage: "376",
+    lastReadPage: "250",
+    lastReadDate: "2024-02-06",
+    uniqId: crypto.randomUUID(),
+    isfavourite: true,
+    imgPath: "assets/book6.png",
+  },
+  {
+    title: "The Catcher in the Rye",
+    author: "J.D. Salinger",
+    totalPage: "277",
+    lastReadPage: "83",
+    lastReadDate: "1998-08-05",
+    uniqId: crypto.randomUUID(),
+    isfavourite: false,
+    imgPath: "assets/book8.png",
+  },
+];
+
+if (!localStorage.getItem("recommendationShown") && allBooks.length === 0) {
+  const wantRecommendation = confirm(
+    "Would you like to start with 4 book recommendations?"
+  );
+  if (wantRecommendation) {
+    allBooks.push(...recommendedBooks);
+    saveToStorage();
+    renderLibrary();
+  }
+  localStorage.setItem("recommendationShown", true);
+}
