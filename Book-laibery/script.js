@@ -1,9 +1,12 @@
+let currentSelectedBookUID;
 let isfavouriteBtnSelected = false;
 
-const addBook = document.querySelector(".modal-overlay");
+const addBookOverlay = document.querySelector(".modal-overlay");
+const bookDetailsOverlay = document.querySelector(".book-details-overlay");
+const mainBookLibrary = document.querySelector(".main-library");
 
 function openModal() {
-  addBook.classList.toggle("active");
+  addBookOverlay.classList.toggle("active");
 }
 function closeEditModal() {
   const editbook = document.querySelector(".edit-modal-overlay");
@@ -11,23 +14,22 @@ function closeEditModal() {
 }
 
 function closeModal() {
-  addBook.classList.toggle("active");
+  addBookOverlay.classList.toggle("active");
 }
 
 document.addEventListener("click", (e) => {
   if (e.target.classList.contains("active")) {
-    addBook.classList.remove("active");
-    bookDeteils.classList.remove("active");
-  }
-});
-const bookDeteils = document.querySelector(".book-details-overlay");
-document.querySelector(".main-library").addEventListener("click", (e) => {
-  if (e.target.closest(".placehoder-book-img")) {
-    bookDeteils.classList.toggle("active");
+    addBookOverlay.classList.remove("active");
+    bookDetailsOverlay.classList.remove("active");
   }
 });
 
-const mainBookLibrary = document.querySelector(".main-library");
+mainBookLibrary.addEventListener("click", (e) => {
+  if (e.target.closest(".placehoder-book-img")) {
+    bookDetailsOverlay.classList.toggle("active");
+  }
+});
+
 mainBookLibrary.addEventListener("click", (e) => {
   const clickedCard = e.target.closest(".book-card");
   if (clickedCard) {
@@ -36,10 +38,9 @@ mainBookLibrary.addEventListener("click", (e) => {
     updateTheBookDetails(currentSelectedBookUID);
   }
 });
-let currentSelectedBookUID;
-function updateTheBookDetails(index) {
-  const currentId = allBooks.findIndex((book) => book.uniqId === index);
-  if (!book) return;
+
+function updateTheBookDetails(bookId) {
+  const currentId = allBooks.findIndex((book) => book.uniqId === bookId);
 
   const bookimg = document.querySelector(".book-img-icon");
   const bookTitle = document.querySelector(".book-titel");
@@ -86,14 +87,14 @@ function deleteBook() {
   );
   if (bookId !== -1) {
     allBooks.splice(bookId, 1);
-    localStorage.setItem("myLibrary", JSON.stringify(allBooks));
+    saveToStorage();
   }
   closeBookDetails();
   renderLibrary();
 }
 
 function closeBookDetails() {
-  bookDeteils.classList.remove("active");
+  bookDetailsOverlay.classList.remove("active");
 }
 
 const allBooks = [];
@@ -148,11 +149,11 @@ addBookForm.addEventListener("submit", (e) => {
     getNextImgPath()
   );
   allBooks.push(newBook);
-  localStorage.setItem("myLibrary", JSON.stringify(allBooks));
+  saveToStorage();
   alert("book is sucsessfully added ");
   renderBook(newBook);
   addBookForm.reset();
-  addBook.classList.remove("active");
+  addBookOverlay.classList.remove("active");
 });
 const imgPath = [
   "assets/book1.png",
@@ -222,13 +223,6 @@ function addOptionsIfNotExists(selectId, value, text) {
   option.value = value;
   selectId.appendChild(option);
 }
-function renderBookWhenPageLoads() {
-  const checkStorage = localStorage.getItem("myLibrary");
-  if (checkStorage) {
-    const books = JSON.parse(checkStorage);
-    books.forEach((book) => renderBook(book));
-  }
-}
 
 document.querySelector(".editbtn").addEventListener("click", () => {
   const editBook = document.querySelector(".book-edit-overlay");
@@ -260,7 +254,7 @@ mainLibraryBtn.addEventListener("click", () => {
   isfavouriteBtnSelected = false;
   fevBtn.style.backgroundColor = "transparent";
   mainLibraryBtn.style.backgroundColor = "#efeff1";
-  renderBookWhenPageLoads();
+  renderLibrary();
 });
 const selectOption = document.querySelector("#author-filter");
 selectOption.addEventListener("change", () => {
@@ -276,4 +270,7 @@ function fillterFunction(arrgument, value) {
   mainBookLibrary.innerHTML = "";
   fillterArry.forEach((book) => renderBook(book));
 }
-renderBookWhenPageLoads();
+function saveToStorage() {
+  localStorage.setItem("myLibrary", JSON.stringify(allBooks));
+}
+renderLibrary();
