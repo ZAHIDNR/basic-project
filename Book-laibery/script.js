@@ -318,14 +318,19 @@ const recommendedBooks = [
   },
 ];
 
-if (!localStorage.getItem("recommendationShown") && allBooks.length === 0) {
-  const wantRecommendation = confirm(
-    "Would you like to start with 4 book recommendations?"
-  );
-  if (wantRecommendation) {
-    allBooks.push(...recommendedBooks);
-    saveToStorage();
-    renderLibrary();
+// Show recommendation prompt if the library is empty
+function checkAndOfferRecommendations() {
+  const hasBooks = allBooks.length > 0;
+  if (!hasBooks) {
+    const confirmAdd = confirm(
+      "Your library is empty. Would you like to start with 4 recommended books?"
+    );
+    if (confirmAdd) {
+      allBooks.push(...recommendedBooks);
+      saveToStorage();
+      renderLibrary();
+    }
   }
-  localStorage.setItem("recommendationShown", true);
 }
+
+checkAndOfferRecommendations();
