@@ -1,0 +1,640 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+:root {
+  --container-color: #fffeff;
+  --menu-color: #fbfbfc;
+  --text-color: #2c2a2d;
+  --button-color: #6167e1;
+  --hover-bgcolor: #efeff1;
+  --star-color: #cccccb;
+  --border-radius: 5px;
+}
+
+body {
+  min-height: 100vh;
+  margin: 2.5rem;
+  background-color: #f5f3f6;
+  color: black;
+}
+
+.container {
+  display: grid;
+  min-height: 100vh;
+  grid-template-columns: 1.5fr 7fr;
+  border-radius: 15px;
+  background-color: var(--container-color);
+  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.4);
+}
+nav {
+  height: 100%;
+  background-color: var(--menu-color);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  border-radius: 15px;
+}
+nav h1 {
+  font-size: 1.8rem;
+}
+.search-input {
+  position: relative;
+  margin-top: 10px;
+}
+.search-input i {
+  font-size: 0.9rem;
+  position: absolute;
+  left: 2%;
+  top: 28%;
+}
+.search-input input {
+  height: 37px;
+  width: 100%;
+  padding: 4px 0px;
+  border: transparent;
+  outline: none;
+  background-color: var(--hover-bgcolor);
+  padding-left: 25px;
+  font-size: 1rem;
+  border-radius: 5px;
+}
+
+footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  height: 100%;
+  font-size: 0.7rem;
+  font-size: 1.1rem;
+}
+.favorites {
+  height: 37px;
+  margin-top: 5px;
+  background-color: transparent;
+  border: none;
+  text-align: start;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.library {
+  height: 37px;
+  background-color: transparent;
+  border: none;
+  text-align: start;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.favorites:hover {
+  background-color: var(--hover-bgcolor);
+  color: var(--button-color);
+}
+.library:hover {
+  background-color: var(--hover-bgcolor);
+  color: var(--button-color);
+}
+
+/* from here books container styling starts */
+.main-content {
+  display: grid;
+  grid-template-rows: 130px 2fr;
+}
+.upper-content {
+  display: grid;
+  padding: 0px 15px;
+}
+.profile-img {
+  background: url(assets/profileblack.png);
+  background-size: contain;
+  background-color: #f5f5f7;
+  border-radius: 50%;
+  width: 3.5rem;
+  height: 3.5rem;
+  justify-self: end;
+  margin-top: 15px;
+  overflow: hidden;
+  cursor: pointer;
+}
+.titel-btn {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+.titel-btn h2 {
+  font-size: 2rem;
+}
+.titel-btn button {
+  background-color: var(--button-color);
+  color: white;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+select {
+  margin-top: 8px;
+  border: none;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  outline: none;
+}
+
+/* book container and book card styling starts here */
+.main-library {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(0, 250px));
+  grid-auto-rows: minmax(0, 300px);
+  gap: 15px;
+}
+.book-card {
+  justify-content: center;
+  display: grid;
+  grid-template-columns: 70%;
+  grid-template-rows: 55% 50px;
+}
+.icon-fix {
+  position: relative;
+}
+.placehoder-book-img {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+  border: none;
+}
+.book-image {
+  background-size: contain;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background-color: #fdffff;
+}
+
+.books-titels {
+  grid-row: 2/3;
+  text-align: center;
+}
+.star-button {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.star-button i {
+  color: #cdcccb;
+  font-size: 1.5rem;
+}
+/* add book pop up styling starts here */
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  background-color: white;
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+.modal-overlay.active .modal {
+  transform: scale(1);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #1d1d1f;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #8e8e93;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.close-btn:hover {
+  background-color: #f2f2f7;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e5e7;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  background-color: #f9f9fb;
+  box-sizing: border-box;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007aff;
+  background-color: white;
+}
+
+.form-input::placeholder {
+  color: #8e8e93;
+}
+
+.form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.btn {
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-secondary {
+  background-color: #f2f2f7;
+  color: #1d1d1f;
+}
+
+.btn-secondary:hover {
+  background-color: #e5e5e7;
+}
+
+.btn-primary {
+  background-color: #007aff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-primary:disabled {
+  background-color: #c7c7cc;
+  cursor: not-allowed;
+}
+/* book details section stats here */
+.book-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.book-details-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.close {
+  display: flex;
+  justify-content: end;
+}
+.background-card {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 32px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+.book-detail-content {
+  display: flex;
+  justify-content: space-between;
+}
+.book-img-icon {
+  background: url(assets/book1.png);
+  background-size: cover;
+  width: 9rem;
+  height: 9rem;
+  position: relative;
+}
+.book-img-icon i {
+  position: absolute;
+  z-index: 999;
+  top: 0;
+  right: 0;
+  color: #cdcccb;
+  cursor: pointer;
+}
+.btn-danger {
+  background-color: red;
+  color: white;
+}
+.book-meta {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: #f9f9fb;
+  padding: 20px;
+}
+.book-info {
+  margin-right: 130px;
+}
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+}
+.progress-bar {
+  width: 100%;
+  height: 10px;
+}
+.progress-fill {
+  width: 90%;
+  height: 100%;
+  background-color: blue;
+  border-radius: 20px;
+}
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: end;
+  gap: 15px;
+}
+.favorites.active {
+  background-color: var(--hover-bgcolor);
+}
+.library.active {
+  background-color: var(--hover-bgcolor);
+}
+
+/* edit book overlay stats here  */
+
+.edit-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+.edit-modal-overlay.active {
+  display: flex;
+  opacity: 1;
+}
+
+.edit-modal-container {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9);
+  transition: transform 0.3s ease-out;
+}
+
+.edit-modal-overlay.active .edit-modal-container {
+  transform: scale(1);
+}
+
+.edit-modal-header {
+  padding: 30px 30px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.edit-modal-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-book-form {
+  padding: 30px;
+}
+
+.edit-form-group {
+  margin-bottom: 24px;
+}
+
+.edit-form-label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #374151;
+  font-size: 14px;
+}
+
+.edit-form-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #f9fafb;
+}
+
+.edit-form-input:focus {
+  outline: none;
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.edit-form-input::placeholder {
+  color: #9ca3af;
+}
+
+.edit-form-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 30px;
+}
+
+.edit-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 100px;
+}
+
+.edit-btn-secondary {
+  background: #f3f4f6;
+  color: #6b7280;
+}
+
+.edit-btn-secondary:hover {
+  background: #e5e7eb;
+  transform: translateY(-2px);
+}
+
+.edit-btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.edit-btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.demo-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.demo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 1030px) {
+  .main-library {
+    justify-content: center;
+  }
+  nav h1 {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 550px) {
+  body {
+    margin: 1rem;
+  }
+  .titel-btn h2 {
+    font-size: 1.3rem;
+  }
+  .titel-btn button {
+    width: 92px;
+  }
+}
+
+@media (max-width: 370px) {
+  .book-card {
+    height: 250px;
+  }
+  .book-image {
+    background-size: cover;
+  }
+}

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Library</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <nav>
+          <h1>Book Library</h1>
+          <button class="favorites">Favorites</button>
+          <button class="library">Library</button>
+          <footer style="text-align: center">
+            <p style="margin: 0">
+              &copy; 2025 Zahid NR
+              <a
+                href="https://github.com/ZAHIDNR/mini-project"
+                target="_blank"
+                class="nav-btn github-btn"
+                title="GitHub Repo"
+                style="text-decoration: none"
+              >
+                <i class="fa-brands fa-github"></i>
+              </a>
+            </p>
+          </footer>
+        </nav>
+      </div>
+      <div class="main-content">
+        <div class="upper-content">
+          <div class="profile-img"></div>
+          <div class="titel-btn">
+            <h2>My Books</h2>
+            <button id="add-book" onclick="openModal()">Add Book</button>
+          </div>
+          <select name="author" id="author-filter">
+            <!-- here we will add option dynamecly based on what user put when they added book -->
+            <option value="all-authors" selected>All authors</option>
+          </select>
+        </div>
+        <div class="main-library"></div>
+      </div>
+    </div>
+    <!-- add book popup  -->
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal">
+        <div class="modal-header">
+          <h3 class="modal-title">Add New Book</h3>
+        </div>
+
+        <form id="bookForm">
+          <div class="form-group">
+            <label class="form-label" for="bookTitle">Book Title</label>
+            <input
+              type="text"
+              id="bookTitle"
+              class="form-input"
+              placeholder="Enter book title"
+              name="titel"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="bookAuthor">Author</label>
+            <input
+              type="text"
+              id="bookAuthor"
+              class="form-input"
+              name="author"
+              placeholder="Enter author name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="totalPages">Total Pages</label>
+            <input
+              type="number"
+              id="totalPages"
+              class="form-input"
+              name="pageNumber"
+              placeholder="Enter total pages"
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="lastReadPage">Last Read Page</label>
+            <input
+              type="number"
+              id="lastReadPage"
+              class="form-input"
+              name="lastReadPage"
+              placeholder="Enter last read page"
+              min="0"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="lastRead">Last Read Date</label>
+            <input
+              type="date"
+              id="lastRead"
+              class="form-input"
+              name="lastReadDate"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              onclick="closeModal()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary">Add Book</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- book edit model stats here -->
+
+    <div class="edit-modal-overlay" id="editModalOverlay">
+      <div class="edit-modal-container">
+        <div class="edit-modal-header">
+          <h3 class="edit-modal-title">Edit Book</h3>
+        </div>
+
+        <form id="editBookForm" class="edit-book-form">
+          <div class="edit-form-group">
+            <label class="edit-form-label" for="editBookTitle"
+              >Book Title</label
+            >
+            <input
+              type="text"
+              id="editBookTitle"
+              class="edit-form-input"
+              placeholder="Enter book title"
+              name="titel"
+              required
+            />
+          </div>
+
+          <div class="edit-form-group">
+            <label class="edit-form-label" for="editBookAuthor">Author</label>
+            <input
+              type="text"
+              id="editBookAuthor"
+              class="edit-form-input"
+              name="author"
+              placeholder="Enter author name"
+              required
+            />
+          </div>
+
+          <div class="edit-form-group">
+            <label class="edit-form-label" for="editTotalPages"
+              >Total Pages</label
+            >
+            <input
+              type="number"
+              id="editTotalPages"
+              class="edit-form-input"
+              name="pageNumber"
+              placeholder="Enter total pages"
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="edit-form-group">
+            <label class="edit-form-label" for="editLastReadPage"
+              >Last Read Page</label
+            >
+            <input
+              type="number"
+              id="editLastReadPage"
+              class="edit-form-input"
+              name="lastReadPage"
+              placeholder="Enter last read page"
+              min="0"
+            />
+          </div>
+
+          <div class="edit-form-group">
+            <label class="edit-form-label" for="editLastRead"
+              >Last Read Date</label
+            >
+            <input
+              type="date"
+              id="editLastRead"
+              class="edit-form-input"
+              name="lastReadDate"
+            />
+          </div>
+
+          <div class="edit-form-actions">
+            <button
+              type="button"
+              class="edit-btn edit-btn-secondary"
+              onclick="closeEditModal()"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="edit-btn edit-btn-primary">
+              Update Book
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- books details model will be here -->
+    <div class="book-details-overlay">
+      <div class="background-card">
+        <div class="close">
+          <button class="close-btn" onclick="closeBookDetails()">×</button>
+        </div>
+        <div class="book-detail-content">
+          <div class="book-img-icon"></div>
+          <div class="book-info">
+            <h2 class="book-titel" id="bookTitel">The Great Gatsby</h2>
+            <p class="book-author" id="bookAuthorDetails">
+              F. Scott Fitzgerald
+            </p>
+            <div class="book-meta">
+              <div class="meta-item">
+                <div class="meta-label">Total Pages</div>
+                <div class="meta-value" id="totalPagesValue">328</div>
+              </div>
+              <div class="meta-item">
+                <div class="meta-label">Last Read</div>
+                <div class="meta-value" id="lastReadValue">Jun 25, 2024</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="book-progress-section">
+          <div class="progress-header">
+            <span class="progress-title">Reading Progress</span>
+            <span class="progress-percentage" id="progressPercentage"
+              >100%</span
+            >
+          </div>
+          <div class="progress-bar">
+            <div
+              class="progress-fill"
+              id="progressFill"
+              style="width: 100%"
+            ></div>
+          </div>
+          <div class="progress-text" id="progressText">
+            88 of 328 pages read
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="btn btn-danger book-delete"
+            onclick="deleteBook()"
+          >
+            Delete Book
+          </button>
+          <button type="button" class="btn btn-secondary editbtn">
+            Edit Book
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            onclick="updateProgress()"
+          >
+            Update Progress
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
