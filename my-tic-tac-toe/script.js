@@ -59,7 +59,7 @@ const displayControl = (() => {
 
   const turn = document.querySelector(".whos-turn");
   const whosTurn = (whos) => {
-    turn.textContent = `${whos.getMark()} TURN`;
+    turn.textContent = ` It's ${whos.getMark()} TURN`;
   };
 
   const newGame = document.querySelector(".newGame");
