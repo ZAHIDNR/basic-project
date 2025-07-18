@@ -1,0 +1,710 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  color: white;
+}
+
+/* Keyframe animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes glow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px #a100ff;
+  }
+  50% {
+    box-shadow: 0 0 25px #ff00ff, 0 0 35px #ff00ff;
+  }
+}
+
+@keyframes textGlow {
+  0%,
+  100% {
+    text-shadow: 0 0 10px #ff6d42;
+  }
+  50% {
+    text-shadow: 0 0 20px #ff6d42, 0 0 30px #ff6d42;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes celebrate {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1) rotate(-5deg);
+  }
+  75% {
+    transform: scale(1.1) rotate(5deg);
+  }
+}
+
+/* Cover section animations */
+.cover {
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #ff6d42 0%, #ff4e2e 100%);
+  display: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.cover.active {
+  display: flex;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.cover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(
+    circle at 30% 70%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 50%
+  );
+  animation: float 4s ease-in-out infinite;
+}
+
+.skelly {
+  width: 40rem;
+  height: 40rem;
+  background: url(assets/Group\ 1.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  animation: float 3s ease-in-out infinite;
+  transition: transform 0.3s ease;
+}
+
+.play {
+  font-family: "Creepster";
+  font-size: 6rem;
+  color: white;
+  width: 350px;
+  height: 107px;
+  background: linear-gradient(135deg, #00a954 0%, #008a47 100%);
+  border-radius: 15px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.play::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.play:hover::before {
+  left: 100%;
+}
+
+.play:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 169, 84, 0.4);
+  animation: textGlow 1s ease-in-out infinite;
+}
+
+.play:active {
+  color: black;
+  background: linear-gradient(135deg, #b4c3c7 0%, #9bb0b5 100%);
+  transform: translateY(2px);
+  box-shadow: 0 5px 10px rgba(0, 169, 84, 0.2);
+}
+/* chip board section  */
+/* animation starts here  */
+
+.chose-avetar {
+  min-height: 100vh;
+  width: 100%;
+  background: url(assets/ChipBoard.jpg);
+  background-size: cover;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.chose-avetar.active {
+  display: flex;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.chip-titel {
+  animation: slideIn 0.8s ease-out;
+}
+
+.chip-titel h1 {
+  text-align: center;
+  font-size: 3rem;
+  font-family: "Creepster";
+  letter-spacing: 4px;
+  animation: textGlow 2s ease-in-out infinite;
+}
+
+.chip-titel p {
+  padding-top: 10px;
+  font-size: 1.2rem;
+  font-weight: lighter;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.3s both;
+}
+
+.contain-chips {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px;
+}
+
+.chip-box {
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  margin-top: 25px;
+  transition: all 0.3s ease;
+  opacity: 0;
+  animation: bounceIn 0.6s ease-out both;
+  position: relative;
+  overflow: hidden;
+}
+
+.X-container .chip-box:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.X-container .chip-box:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.X-container .chip-box:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.O-container .chip-box:nth-child(1) {
+  animation-delay: 0.4s;
+}
+.O-container .chip-box:nth-child(2) {
+  animation-delay: 0.5s;
+}
+.O-container .chip-box:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.Chip-backgroundColor-1 {
+  border: 6px solid #00a954;
+}
+.chip-1 {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 40px;
+  background: url(assets/Green-Chip1.svg);
+  background-size: contain;
+}
+.chip-1:checked {
+  border: 3px solid red;
+}
+.Chip-backgroundColor-2 {
+  border: 6px solid #6236ff;
+}
+.chip-2 {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 40px;
+  background: url(assets/Blue-Chip-2.svg);
+  background-size: contain;
+}
+.chip-2:checked {
+  border: 3px solid red;
+}
+.Chip-backgroundColor-3 {
+  border: 6px solid #e695d6;
+}
+.chip-3 {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 40px;
+  background: url(assets/Pink-Chip-3.svg);
+  background-size: contain;
+}
+.chip-3:checked {
+  border: 3px solid red;
+}
+input {
+  appearance: none;
+}
+.play-after-chipSelect {
+  margin-top: 50px;
+  font-family: "Creepster";
+  font-size: 3rem;
+  color: white;
+  width: 260px;
+  height: 75px;
+  background-color: #00a954;
+  border-radius: 10px;
+  border: none;
+}
+.play-after-chipSelect:active {
+  color: black;
+  background-color: #b4c3c7;
+  transition: all 0.4s ease;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/* gameBoard starts here */
+.main-gameBoard {
+  width: 100%;
+  min-height: 100vh;
+  background: url(assets/ChipBoard.jpg);
+  background-size: cover;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.main-gameBoard.active {
+  display: flex;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+.gameBoard-bg {
+  width: 28rem;
+  height: 28rem;
+  background: url(assets/Grid.svg);
+  background-size: contain;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  gap: 20px;
+  padding: 25px;
+  width: 100%;
+  max-width: 28rem;
+  aspect-ratio: 1/1;
+  align-items: center;
+  opacity: 0;
+  animation: bounceIn 0.8s ease-out 0.3s both;
+}
+
+.mark {
+  width: 75%;
+  height: 75%;
+  margin-left: 15px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.mark:hover {
+  transform: scale(1.05);
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.mark:active {
+  transform: scale(0.95);
+}
+
+.mark.placed {
+  animation: bounceIn 0.5s ease-out;
+}
+
+.scoreboard {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: 85%;
+  opacity: 0;
+  animation: slideIn 0.8s ease-out 0.6s both;
+}
+
+.card {
+  padding: 20px 30px;
+  border: 3px solid #fff;
+  border-image: url("https://www.transparenttextures.com/patterns/skulls.png")
+    30 round;
+  background-color: #24003a;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 120px;
+  box-shadow: 0 0 15px #a100ff;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  animation: glow 3s ease-in-out infinite;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.card:hover::before {
+  transform: translateX(100%);
+}
+
+.card:hover {
+  transform: scale(1.05) translateY(-5px);
+  box-shadow: 0 15px 25px rgba(255, 0, 255, 0.4);
+}
+
+.card h3 {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 1px;
+  color: #9e8cff;
+  position: relative;
+  z-index: 1;
+}
+
+.card p {
+  margin: 8px 0 0;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffdd57;
+  position: relative;
+  z-index: 1;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Creepster&display=swap");
+
+/* Navigation animations */
+nav {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+  margin-bottom: 50px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  opacity: 0;
+  animation: slideIn 0.8s ease-out 0.4s both;
+}
+
+nav button {
+  padding: 10px 20px;
+  background-color: #24003a;
+  color: #ffdd57;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 1px;
+  border: 3px solid #fff;
+  border-image: url("https://www.transparenttextures.com/patterns/skulls.png")
+    30 round;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+nav button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+nav button:hover::before {
+  transform: translateX(100%);
+}
+
+nav button:hover,
+header button:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 16px rgba(255, 0, 0, 0.3);
+}
+
+nav button:active {
+  transform: scale(0.95);
+}
+
+.reset {
+  animation: rotate 2s linear infinite paused;
+}
+
+.reset:hover {
+  animation-play-state: running;
+}
+
+/* Header animations */
+header {
+  position: absolute;
+  width: 100%;
+  background: transparent;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  padding: 10px 20px;
+  z-index: 1000;
+  margin-top: -10px;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  opacity: 0;
+  animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+header button,
+.nav-btn {
+  background: transparent;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: white;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+}
+
+header button:hover,
+.nav-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  text-shadow: 0 0 10px currentColor;
+}
+
+.github-btn {
+  color: #f3f4f6;
+}
+
+.github-btn:hover {
+  animation: pulse 0.5s ease-in-out;
+}
+
+.danger-btn {
+  color: #f87171;
+}
+
+.danger-btn:hover {
+  color: #ef4444;
+  animation: shake 0.5s ease-in-out;
+}
+
+.menu-btn {
+  color: var(--text-light);
+}
+
+/* Special effect classes */
+.winning-cell {
+  animation: pulse 1s ease-in-out infinite;
+  box-shadow: 0 0 20px #00ff00;
+}
+
+.celebrate {
+  animation: celebrate 0.6s ease-in-out;
+}
+
+.page-transition {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.interactive:hover {
+  cursor: pointer;
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
+}
+
+/* Media queries with animations */
+@media (max-width: 500px) {
+  header {
+    padding: 8px 15px;
+  }
+
+  .nav-right {
+    gap: 8px;
+  }
+
+  header button,
+  .nav-btn {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .skelly {
+    width: 30rem;
+    height: 30rem;
+  }
+}
+
+@media (max-width: 492px) {
+  .skelly {
+    position: relative;
+    top: 80px;
+    width: 20rem;
+    height: 20rem;
+  }
+
+  .play {
+    position: relative;
+    top: 190px;
+    font-size: 4rem;
+    width: 280px;
+    height: 90px;
+  }
+
+  .chip-titel p {
+    font-size: 1rem;
+  }
+
+  .gameBoard-bg {
+    width: 415px;
+    height: 415px;
+  }
+
+  .chip-titel h1 {
+    font-size: 2.5rem;
+  }
+
+  .play-after-chipSelect {
+    font-size: 2.5rem;
+    width: 220px;
+    height: 65px;
+  }
+}

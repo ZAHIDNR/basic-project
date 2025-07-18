@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SkellyVerse tic tac toe</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Creepster&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="nav-right">
+        <a
+          href="https://github.com/ZAHIDNR/mini-project"
+          target="_blank"
+          class="nav-btn github-btn"
+          title="GitHub Repo"
+        >
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <button class="nav-btn danger-btn" title="Danger Action">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+        </button>
+      </div>
+    </header>
+    <section class="cover active">
+      <div class="skelly"></div>
+      <button class="play">Play</button>
+    </section>
+    <section class="chose-avetar">
+      <div class="chip-titel">
+        <h1>Select your chip</h1>
+        <p>Chips represent X and O. You can choose your own avatar.</p>
+      </div>
+
+      <form class="chip-container">
+        <div class="contain-chips X-container">
+          <div class="Chip-backgroundColor-1 chip-box">
+            <input
+              type="radio"
+              class="chip-1 playerX"
+              name="playerX"
+              value="X"
+              data-chip="Xchip-1"
+            />
+          </div>
+          <div class="Chip-backgroundColor-2 chip-box">
+            <input
+              type="radio"
+              class="chip-2 playerX"
+              name="playerX"
+              value="X"
+              data-chip="Xchip-2"
+            />
+          </div>
+          <div class="Chip-backgroundColor-3 chip-box">
+            <input
+              type="radio"
+              class="chip-3 playerX"
+              name="playerX"
+              value="X"
+              data-chip="Xchip-3"
+            />
+          </div>
+        </div>
+        <div class="contain-chips O-container">
+          <div class="Chip-backgroundColor-1 chip-box">
+            <input
+              type="radio"
+              name="playerO"
+              value="O"
+              class="chip-1 playerO"
+              data-chip="Ochip-1"
+            />
+          </div>
+          <div class="Chip-backgroundColor-2 chip-box">
+            <input
+              type="radio"
+              name="playerO"
+              value="O"
+              class="chip-2 playerO"
+              data-chip="Ochip-2"
+            />
+          </div>
+          <div class="Chip-backgroundColor-3 chip-box">
+            <input
+              type="radio"
+              name="playerO"
+              value="O"
+              class="chip-3 playerO"
+              data-chip="Ochip-3"
+            />
+          </div>
+        </div>
+
+        <button class="play-after-chipSelect">Start</button>
+      </form>
+    </section>
+    <section class="main-gameBoard">
+      <nav>
+        <button class="whos-turn"></button>
+        <button class="newGame">New Game</button>
+        <button class="reset">↺</button>
+      </nav>
+      <div class="mark-container">
+        <div class="gameBoard-bg">
+          <div class="markPlace-1 mark" data-index="0"></div>
+          <div class="markPlace-2 mark" data-index="1"></div>
+          <div class="markPlace-3 mark" data-index="2"></div>
+          <div class="markPlace-4 mark" data-index="3"></div>
+          <div class="markPlace-5 mark" data-index="4"></div>
+          <div class="markPlace-6 mark" data-index="5"></div>
+          <div class="markPlace-7 mark" data-index="6"></div>
+          <div class="markPlace-8 mark" data-index="7"></div>
+          <div class="markPlace-9 mark" data-index="8"></div>
+        </div>
+      </div>
+      <div class="scoreboard">
+        <div class="card player-x">
+          <h3>PLAYER X</h3>
+          <p>0</p>
+        </div>
+        <div class="card ties">
+          <h3>TIES</h3>
+          <p>0</p>
+        </div>
+        <div class="card player-o">
+          <h3>PLAYER O</h3>
+          <p>0</p>
+        </div>
+      </div>
+    </section>
+
+    <script src="script.js"></script>
+  </body>
+</html>
