@@ -32,7 +32,7 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 </p>  
  <a href = "https://zahidnr.github.io/basic-project/moden-form/">Preview</a>
 
-5. ##  Admin-dashboard  
+5. ##  Admin-dashboard   
 
 <p align="center">
   <img src="Project%20Preview%20IMG/admin-dashboard.png" width="500">
@@ -49,8 +49,8 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 
  7. ##  skally verse tic tac toe 
  <p align="center">
-  <img src="Project%20Preview%20IMG/covertictactoe.png" width="500">
-  <img src="Project%20Preview%20IMG/avetar.png" width="500">
-  <img src="Project%20Preview%20IMG/gameBoard.png" width="500">
+  <img src="my-tic-tac-toe/assets/covertictactoe.png" width="500">
+  <img src="my-tic-tac-toe/assets/avetar.png" width="500">
+  <img src="my-tic-tac-toe/assets/gameBoard.png" width="500">
 </p>  
  <a href = "https://zahidnr.github.io/basic-project/my-tic-tac-toe/">Preview</a>
