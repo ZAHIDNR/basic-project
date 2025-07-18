@@ -27,8 +27,8 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 
 
 <p align="center">
-  <img src="Project%20Preview%20IMG/formDark.png" alt="calculator App Preview" width="500">
- <img src="Project%20Preview%20IMG/formLight.png" alt="calculator App Preview" width="500">
+  <img src="Project%20Preview%20IMG/formDark.png" alt="calculator App Preview" width="400">&nbsp;
+ <img src="Project%20Preview%20IMG/formLight.png" alt="calculator App Preview" width="400">
 </p>  
  <a href = "https://zahidnr.github.io/basic-project/moden-form/">Preview</a>
 
@@ -49,7 +49,7 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 
  7. ##  skally verse tic tac toe 
  <p align="center">
-  <img src="my-tic-tac-toe/assets/covertictactoe.png" width="400">
+  <img src="my-tic-tac-toe/assets/covertictactoe.png" width="400">&nbsp;
   <img src="my-tic-tac-toe/assets/gameBoard.png" width="400">
 </p>  
  <a href = "https://zahidnr.github.io/basic-project/my-tic-tac-toe/">Preview</a>
