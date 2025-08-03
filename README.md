@@ -10,8 +10,8 @@
 A beautifully designed to-do app with a soft **Sakura theme**!  
 
 <p align="center">
-  <img src="Project%20Preview%20IMG/todoLight.png" alt="calculator App Preview" width="400">&nbsp;
- <img src="Project%20Preview%20IMG/todoDark.png" alt="calculator App Preview" width="400">
+  <img src="Project%20Preview%20IMG/todolight.png" alt="todo App Preview" width="400">&nbsp;
+ <img src="Project%20Preview%20IMG/tododark.png" alt="todo App Preview" width="400">
 </p>  
  <a href = "https://zahidnr.github.io/basic-project/To-Do-List%20V2/">Preview</a>
 
