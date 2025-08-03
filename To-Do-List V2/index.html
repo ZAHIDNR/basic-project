@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do List</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+
+    <nav>
+      <div class="nav-btn">
+        <input
+          type="search"
+          placeholder="Search tasks..."
+          class="search-input"
+        />
+        <button class="darkMode-toggle">🌙</button>
+        <div class="hamburger-menu">
+          <i class="fas fa-bars" id="menuIcon"></i>
+        </div>
+      </div>
+
+      <ul>
+        <button
+          class="all-task"
+          onclick="StorageManagement.changeTheKey('toDoList')"
+        >
+          All Tasks
+        </button>
+        <button
+          class="today-task"
+          onclick="StorageManagement.changeTheKey('towayTask')"
+        >
+          Today's Tasks
+        </button>
+        <button
+          class="weekly-task"
+          onclick="StorageManagement.changeTheKey('weeklyTask')"
+        >
+          Weekly Tasks
+        </button>
+      </ul>
+    </nav>
+    <!-- menu overlay -->
+    <div class="menu-overlay">
+      <div class="sidebar-menu">
+        <div class="menu-header">
+          <div class="sakura-icon">🌸</div>
+          <h2>Sakura Menu</h2>
+        </div>
+
+        <div class="menu-items">
+          <button
+            class="menu-item"
+            onclick="StorageManagement.changeTheKey('toDoList')"
+          >
+            <span class="menu-item-icon">📋</span>
+            All Tasks
+          </button>
+          <button
+            class="menu-item"
+            onclick="StorageManagement.changeTheKey('towayTask')"
+          >
+            <span class="menu-item-icon">📅</span>
+            Today's Tasks
+          </button>
+          <button
+            class="menu-item"
+            onclick="StorageManagement.changeTheKey('weeklyTask')"
+          >
+            <span class="menu-item-icon">📆</span>
+            Weekly Tasks
+          </button>
+        </div>
+
+        <div class="menu-footer">
+          <button class="dark-mode-toggle" onclick="toggleDarkMode()">
+            <span id="theme-icon">🌙</span>
+            <span style="margin-left: 8px" id="theme-text">Dark Mode</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <h1>My Sakura-Themed To-Do-List</h1>
+      <div class="content">
+        <div class="add-item">
+          <h2>All Tasks</h2>
+          <div class="add-todo">
+            <input
+              type="text"
+              maxlength="216"
+              placeholder="Add a new task..."
+              class="add-input"
+            />
+            <button class="add">Add</button>
+          </div>
+        </div>
+        <div class="line">
+          <hr />
+        </div>
+        <ul class="task-list"></ul>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
