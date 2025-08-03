@@ -12,7 +12,7 @@ A beautifully designed to-do app with a soft **Sakura theme**!
 <p align="center">
   <img src="Project%20Preview%20IMG/todoapp.png" alt="Sakura To-Do App Preview" width="500">
 </p>  
- <a href = "https://zahidnr.github.io/basic-project/to-do-list--main/">Preview</a>
+ <a href = "https://zahidnr.github.io/basic-project/To-Do-List%20V2/">Preview</a>
 
 3. ##  calculator
 
