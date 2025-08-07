@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="weather-container" id="weatherContainer">
+      <div class="header">
+        <h1 class="app-title">Weather App</h1>
+      </div>
+
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Enter city name..."
+        />
+      </div>
+
+      <div class="toggle-container">
+        <div class="temperature-toggle">
+          <div class="toggle-option" id="celsius">°C</div>
+          <div class="toggle-option active" id="fahrenheit">°F</div>
+        </div>
+      </div>
+
+      <div class="weather-display" id="weatherDisplay">
+        <div class="current-weather">
+          <div class="location" id="locationName">Select a city</div>
+
+          <div class="weather-icon-container">
+            <div class="weather-gif-placeholder" id="weatherGif"></div>
+          </div>
+
+          <div class="temperature" id="temperature">--°</div>
+          <div class="weather-condition" id="weatherCondition">--</div>
+        </div>
+
+        <div class="weather-details">
+          <div class="weather-detail-card">
+            <div class="detail-label">Feels Like</div>
+            <div class="detail-value" id="feelsLike">--°</div>
+          </div>
+
+          <div class="weather-detail-card">
+            <div class="detail-label">Humidity</div>
+            <div class="detail-value" id="humidity">--%</div>
+          </div>
+
+          <div class="weather-detail-card">
+            <div class="detail-label">Wind Speed</div>
+            <div class="detail-value" id="windSpeed">-- km/h</div>
+          </div>
+
+          <div class="weather-detail-card">
+            <div class="detail-label">Pressure</div>
+            <div class="detail-value" id="pressure">-- hPa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
