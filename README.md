@@ -54,3 +54,15 @@ A beautifully designed to-do app with a soft **Sakura theme**!
   <img src="my-tic-tac-toe/assets/gameBoard.png" width="400">
 </p>  
  <a href = "https://zahidnr.github.io/basic-project/my-tic-tac-toe/">Preview</a>
+
+  8. ##  Weather-App 
+
+<p align="center">
+  <img src="Project%20Preview%20IMG/Weather-App.png" width="500">
+</p>  
+ <a href = "https://zahidnr.github.io/basic-project/Weather-App/">Preview</a>
+
+
+
+
+ 
